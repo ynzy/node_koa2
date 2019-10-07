@@ -1,4 +1,4 @@
-const Router = require('./node_modules/koa-router')
+const Router = require("koa-router")
 const router = new Router()
 
 router.get('/book/latest', (ctx, next) => {

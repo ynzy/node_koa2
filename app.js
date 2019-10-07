@@ -1,10 +1,13 @@
 const Koa = require('koa')
 // const Router = require('koa-router')
 
-const InitManger = require('./core/init')
+const InitManager = require('./core/init')
 
+// 实例化
 const app = new Koa()
-InitManger.initCore(app)
+// const router = new Router()
+
+InitManager.initCore(app)
 
 
 const port = 3000  //端口号

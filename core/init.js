@@ -1,11 +1,9 @@
-const requireDirectory = require('require-directory')
 const Router = require('koa-router')
-
+const requireDirectory = require('require-directory')
 
 class InitManager {
   static initCore(app) {
     // 入口方法
-    // InitManager.initLoadRouters(app)
     InitManager.app = app
     InitManager.initLoadRouters()
   }
@@ -22,6 +20,7 @@ class InitManager {
       }
     }
   }
+  
 }
 
 module.exports = InitManager
