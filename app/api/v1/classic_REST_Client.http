@@ -7,7 +7,7 @@
 @modifiedBy = {{$processEnv USERNAME}}
 
 ### 点赞
-POST {{host}}/v1/classic/latest/3?param=8yue
+POST {{host}}/v1/classic/latest/3
 content-type: {{contentType}}
 appkey: 123123
 

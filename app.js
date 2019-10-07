@@ -3,13 +3,14 @@ const Router = require('koa-router')
 const parser = require('koa-bodyparser')
 
 const InitManager = require('./core/init')
+const catchError = require('./middlewares/exception')
 
 // 实例化
 const app = new Koa()
 // const router = new Router()
 
 app.use(parser())
-
+app.use(catchError)
 InitManager.initCore(app)
 
 

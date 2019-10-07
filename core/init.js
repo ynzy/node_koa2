@@ -2,12 +2,14 @@ const Router = require('koa-router')
 const requireDirectory = require('require-directory')
 
 class InitManager {
+  //* 初始化核心方法
   static initCore(app) {
     // 入口方法
     InitManager.app = app
     InitManager.initLoadRouters()
+    InitManager.loadHttpException()
   }
-  // 初始化路由
+  //* 初始化路由
   static initLoadRouters() {
     // 导入路径的所有模块
     const apiDir = `${process.cwd()}/app/api`;
@@ -20,7 +22,11 @@ class InitManager {
       }
     }
   }
-  
+  //* global加载异常处理方法
+  static loadHttpException() {
+    const errors = require('./http-exception')
+    global.errs = errors
+  }
 }
 
 module.exports = InitManager
