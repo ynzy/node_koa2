@@ -1,0 +1,32 @@
+@hostname = http://localhost
+@port = 9000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+@appkey = RdshydjBvcYZhMZC
+@createdAt = {{$datetime iso8601}}
+@modifiedBy = {{$processEnv USERNAME}}
+
+### 点赞
+POST {{host}}/v1/classic/latest/3?param=8yue
+content-type: {{contentType}}
+appkey: 123123
+
+{
+  "art_id": 1,
+  "type": 100
+}
+
+### 取消点赞
+POST {{hostname}}/like/cancel
+content-type: {{contentType}}
+appkey: {{appkey}}
+
+{
+  "art_id": 1,
+  "type": 100
+}
+
+### 获取点赞信息
+GET {{hostname}}classic/100/1/favor
+content-type: {{contentType}}
+appkey: {{appkey}}
