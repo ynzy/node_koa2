@@ -4,6 +4,8 @@ const catchError = async (ctx, next) => {
   try {
     await next()
   } catch (error) {
+    console.log(error);
+
     // 已知异常
     if (error instanceof HttpException) {
       ctx.body = {

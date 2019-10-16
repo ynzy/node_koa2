@@ -1,25 +1,21 @@
 const Router = require('koa-router')
 const router = new Router()
 
-const { HttpException, ParameterException } = require('../../../core/http-exception.js')
+const { PositiveIntergerValidator } = require('../../validators/validator')
 
-router.post('/v1/classic/latest/:id', (ctx, next) => {
+router.post('/v1/:id/classic/latest', async (ctx, next) => {
   const params = ctx.params
   const query = ctx.query
   const headers = ctx.header
   const body = ctx.request.body
-  if (true) {
-    const error = new global.errs.ParameterException()
-    // error.requestUrl = `${ctx.method} ${ctx.path}`
-    throw error
-  }
-  ctx.body = {
-    key: 'classic'
-  }
-  /**
-   * 监听错误
-   * 输出一段有意义的提示信息
-   */
+  console.log(ctx.params);
+
+  const v = await new PositiveIntergerValidator().validate(ctx)
+  // 使用验证器获取参数
+  //获取值并进行类型转换 get方法使用的是loadsh的get方法,如果想获取原数据,第二个参数设置为false
+  // const id = v.get('path.id', false)
+  console.log(id);
+
 })
 
 module.exports = router

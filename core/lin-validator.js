@@ -1,9 +1,9 @@
 /**
  * Lin-Validator v2
  */
-
 const validator = require("validator")
 const { get, last, set, cloneDeep } = require("lodash")
+const { ParameterException } = require('../core/http-exception')
 const { findMembers } = require("./util")
 
 class LinValidator {
@@ -70,7 +70,8 @@ class LinValidator {
       }
     }
     if (errorMsgs.length != 0) {
-      // throw new ParameterException(errorMsgs)
+      // note: 错误校验
+      throw new ParameterException(errorMsgs)
       console.log(errorMsgs)
     }
     ctx.v = this
