@@ -1,11 +1,11 @@
 module.exports = {
   env: "dev",
   database: {
-    dbName: "node", // 数据库名
+    dbName: "isLand", // 数据库名
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "709463253"
+    password: ""
   },
   security: {
     secretKey: "qwert",
