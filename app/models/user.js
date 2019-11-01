@@ -1,6 +1,8 @@
+const bcrypt = require('bcryptjs')
+const { Sequelize, Model } = require('sequelize')
+
 const { sequelize } = require('../../core/db') //sequelize实例
 
-const { Sequelize, Model } = require('sequelize')
 
 class User extends Model {
 
@@ -23,11 +25,28 @@ User.init({
     autoIncrement: true, // 自动增长
   },
   nickname: Sequelize.STRING,
-  email:  {
+  email: {
     type: Sequelize.STRING(128), //限制最大范围
     unique: true, //指定唯一
   },
-  password: Sequelize.STRING,
+  password: {
+    type: Sequelize.STRING,
+    /**
+     * note: model的属性操作
+     * 设计模式  观察者模式
+     * es6: Reflect Vue3.0
+     */
+    set(val) {
+      //note: 密码加密 盐
+      const salt = bcrypt.genSaltSync(10)
+      /**
+       * 10的意思: 指的是生成盐的成本,越大,花费成本越高,密码安全性越高,一般取默认值
+       * 明文,相同密码加密之后也要不同,防止彩虹攻击
+       */
+      const psw = bcrypt.hashSync(val, salt)
+      this.setDataValue('password', psw)
+    }
+  },
   openid: {
     type: Sequelize.STRING(64), //限制最大范围
     unique: true, //指定唯一
