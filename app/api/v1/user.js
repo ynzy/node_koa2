@@ -9,6 +9,11 @@ const router = new Router({
 /**
  * 注册
  */
+// router.post('/register', new RegisterValidator() async (ctx) => {
+/**
+ * 使用中间件的形式做校验,全局只有1个validator
+ * 
+ */
 router.post('/register', async (ctx) => {
   /**
    * 编写路由思维路径
@@ -18,6 +23,7 @@ router.post('/register', async (ctx) => {
    * v.get
    * sql Model
    */
+  // 使用实例化方式,调用10次会实例化10次
   const v = await new RegisterValidator().validate(ctx)
   const user = {
     email: v.get('body.email'),
@@ -25,8 +31,6 @@ router.post('/register', async (ctx) => {
     nickname: v.get('body.nickname')
   }
   await User.create(user)
-  
-
 })
 
 module.exports = router
