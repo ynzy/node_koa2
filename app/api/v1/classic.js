@@ -22,8 +22,10 @@ router.post('/v1/:id/classic/latest', async (ctx, next) => {
   // 使用验证器获取参数
   //获取值并进行类型转换 get方法使用的是loadsh的get方法,如果想获取原数据,第二个参数设置为false
   // const id = v.get('path.id', false)
-  console.log(id);
-
+  // console.log(id);
+  ctx.body = {
+    key: 'classic'
+  }
 })
 
 module.exports = router

@@ -23,7 +23,10 @@ User.init({
     autoIncrement: true, // 自动增长
   },
   nickname: Sequelize.STRING,
-  email: Sequelize.STRING,
+  email:  {
+    type: Sequelize.STRING(128), //限制最大范围
+    unique: true, //指定唯一
+  },
   password: Sequelize.STRING,
   openid: {
     type: Sequelize.STRING(64), //限制最大范围
@@ -42,3 +45,7 @@ User.init({
 })
 
 // 数据迁移 SQL更新 风险
+
+module.exports = {
+  User
+}

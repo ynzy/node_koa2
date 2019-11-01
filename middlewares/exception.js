@@ -6,11 +6,14 @@ const catchError = async (ctx, next) => {
   } catch (error) {
     // 开发环境
     // 生产环境
-    if (global.config.env === 'dev') {
+    // 抛出异常条件 开发环境 且 不是HttpException
+    const isHttpException = error instanceof HttpException
+    const isDev = global.config.env === 'dev'
+    if (isDev && !isHttpException) {
       throw error
     }
     // 已知异常
-    if (error instanceof HttpException) {
+    if (isHttpException) {
       ctx.body = {
         msg: error.msg,
         error_code: error.errorCode,
@@ -20,7 +23,7 @@ const catchError = async (ctx, next) => {
     } else {
       // 未知异常
       ctx.body = {
-        msg: 'we made a mistake, unknown error',
+        msg: 'we made a mistake, unknown error O(∩_∩)O~~',
         error_code: 999,
         request: `${ctx.method} ${ctx.path}`
       }

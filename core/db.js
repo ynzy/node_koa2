@@ -10,7 +10,8 @@ const sequelize = new Sequelize(dbName, user, password, {
   dialect: 'mysql',
   host,
   port,
-  logging: true, //显示数据库操作
+  //note: 显示数据库操作
+  logging: true,
   timezone: '+08:00', //时区,不设置会与北京相差8小时
   define: {
     // create_time update_time delete_time
@@ -23,7 +24,8 @@ const sequelize = new Sequelize(dbName, user, password, {
     freezeTableName: true
   }
 })
-//同步更新数据库
+//note:同步模型到数据库
+//sync方法如果配置{force: true}时，判断数据库是否有该表，如果有则会删除表，再重建。
 sequelize.sync({
   force: true
 })

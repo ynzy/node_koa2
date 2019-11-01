@@ -71,8 +71,9 @@ class LinValidator {
     }
     if (errorMsgs.length != 0) {
       // note: 错误校验
+      // console.log(errorMsgs)
       throw new ParameterException(errorMsgs)
-      console.log(errorMsgs)
+
     }
     ctx.v = this
     return this
