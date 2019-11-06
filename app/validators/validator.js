@@ -4,7 +4,7 @@ const {
 } = require('../../core/lin-validator-v2')
 
 const { User } = require('../models/user')
-const { LoginType } = require('../lib/enum')
+const { LoginType } = require('../lib/enums')
 /**
  * 校验正整数
  * @class PositiveIntergerValidator

@@ -27,7 +27,7 @@ const sequelize = new Sequelize(dbName, user, password, {
 //note:同步模型到数据库
 //sync方法如果配置{force: true}时，判断数据库是否有该表，如果有则会删除表，再重建。
 sequelize.sync({
-  force: true
+  force: false
 })
 module.exports = {
   sequelize

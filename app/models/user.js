@@ -3,9 +3,27 @@ const { Sequelize, Model } = require('sequelize')
 
 const { sequelize } = require('../../core/db') //sequelize实例
 
-
 class User extends Model {
-
+  /**
+   * 核对用户邮箱密码
+   *
+   * @static
+   * @param {*} email 
+   * @param {*} plainPassword
+   * @memberof User
+   */
+  static async verifyEmailPassword(email,plainPassword) {
+    const user = await User.findOne({
+      where: {
+        email
+      }
+    })
+    if(!user) throw new global.errs.AuthFailed('用户不存在')
+    // 密码验证
+    const correct = bcrypt.compareSync(plainPassword,user.password)
+    if(!correct) throw new global.errs.AuthFailed('密码不正确')
+    return user
+  }
 }
 User.init({
   /** 
