@@ -12,7 +12,8 @@ class User extends Model {
    * @param {*} plainPassword
    * @memberof User
    */
-  static async verifyEmailPassword(email,plainPassword) {
+
+static async verifyEmailPassword(email,plainPassword) {
     const user = await User.findOne({
       where: {
         email

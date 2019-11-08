@@ -42,13 +42,5 @@ router.post('/register', async (ctx) => {
   success('注册成功')
 })
 
-/**
- * 登录
- * session 考虑状态  无状态
- * email password
- * 2. 令牌获取 颁布令牌
- * token 无意义的随机字符串
- * jwt 可以携带数据
- */
 
 module.exports = router
