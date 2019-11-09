@@ -18,6 +18,7 @@ function isThisType(val) {
 }
 
 // 登录类型
+
 const LoginType = {
   USER_MINI_PROGRAM: 100, //用户小程序
   USER_EMAIL: 101,  // 用户email
@@ -26,6 +27,12 @@ const LoginType = {
   isThisType
 }
 
+// 权限类型
+const AuthType = {
+  LATEST: 7, //课程列表
+}
+
 module.exports = {
-  LoginType
+  LoginType,
+  AuthType
 }

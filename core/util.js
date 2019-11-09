@@ -30,7 +30,13 @@ const findMembers = function(instance, { prefix, specifiedType, filter }) {
 
   return _find(instance)
 }
-
+/**
+ * 生成jwt Token
+ *
+ * @param {*} uid
+ * @param {*} scope
+ * @returns
+ */
 const generateToken = function(uid, scope) {
   const secretKey = config.security.secretKey
   const expiresIn = config.security.expiresIn

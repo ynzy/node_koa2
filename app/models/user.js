@@ -13,17 +13,46 @@ class User extends Model {
    * @memberof User
    */
 
-static async verifyEmailPassword(email,plainPassword) {
+  static async verifyEmailPassword(email, plainPassword) {
     const user = await User.findOne({
       where: {
         email
       }
     })
-    if(!user) throw new global.errs.AuthFailed('用户不存在')
+    if (!user) throw new global.errs.AuthFailed('用户不存在')
     // 密码验证
-    const correct = bcrypt.compareSync(plainPassword,user.password)
-    if(!correct) throw new global.errs.AuthFailed('密码不正确')
+    const correct = bcrypt.compareSync(plainPassword, user.password)
+    if (!correct) throw new global.errs.AuthFailed('密码不正确')
     return user
+  }
+  /**
+   * 获取openid
+   *
+   * @static
+   * @param {*} openid
+   * @returns
+   * @memberof User
+   */
+  static async getUserByOpenid(openid) {
+    const user = await User.findOne({
+      where: {
+        openid
+      }
+    })
+    return user
+  }
+  /**
+   * 添加openid
+   *
+   * @static
+   * @param {*} openid
+   * @returns
+   * @memberof User
+   */
+  static async registerByOpenid(openid) {
+    return await User.create({
+      openid
+    })
   }
 }
 User.init({

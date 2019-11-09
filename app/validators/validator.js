@@ -18,7 +18,12 @@ class PositiveIntergerValidator extends LinValidator {
     })]
   }
 }
-
+/**
+ * 注册校验
+ *
+ * @class RegisterValidator
+ * @extends {LinValidator}
+ */
 class RegisterValidator extends LinValidator {
   constructor() {
     super()
@@ -61,7 +66,12 @@ class RegisterValidator extends LinValidator {
     }
   }
 }
-
+/**
+ * 登录校验
+ *
+ * @class TokenValidator
+ * @extends {LinValidator}
+ */
 class TokenValidator extends LinValidator {
   constructor() {
     super()
@@ -96,9 +106,24 @@ class TokenValidator extends LinValidator {
     }
   }
 }
+/**
+ * 校验token是否为空
+ *
+ * @class NotEmptyValidator
+ * @extends {LinValidator}
+ */
+class NotEmptyValidator extends LinValidator{
+  constructor() {
+    super()
+    this.token = [
+      new Rule('isLength','不允许为空',{min:1})
+    ]
+  }
+}
 
 module.exports = {
   PositiveIntergerValidator,
   RegisterValidator,
-  TokenValidator
+  TokenValidator,
+  NotEmptyValidator
 }

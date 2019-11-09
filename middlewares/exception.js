@@ -1,5 +1,7 @@
 const { HttpException } = require('../core/http-exception')
-// 捕获错误
+/**
+ * 捕获错误
+ */
 const catchError = async (ctx, next) => {
   try {
     await next()
