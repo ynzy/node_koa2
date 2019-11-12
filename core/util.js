@@ -33,8 +33,8 @@ const findMembers = function(instance, { prefix, specifiedType, filter }) {
 /**
  * 生成jwt Token
  *
- * @param {*} uid
- * @param {*} scope
+ * @param {*} uid 用户id
+ * @param {*} scope 用户权限
  * @returns
  */
 const generateToken = function(uid, scope) {
