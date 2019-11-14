@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs')
 const { Sequelize, Model } = require('sequelize')
-
 const { sequelize } = require('../../core/db') //sequelize实例
 
 class User extends Model {

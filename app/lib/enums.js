@@ -32,6 +32,16 @@ const AuthType = {
   LATEST: 7, //课程列表
 }
 
+// 期刊类型
+const ArtType = {
+  MOVIE:100,
+  MUSIC:200,
+  SENTENCE:300,
+  BOOK:400,
+  isThisType
+}
+
+
 module.exports = {
   LoginType,
   AuthType
