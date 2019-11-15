@@ -1,31 +1,45 @@
 const Router = require('koa-router')
-
-const { Flow } = require('../../models/flow')
-
 const router = new Router({
   prefix: '/v1/classic'
 })
 
-const { PositiveIntergerValidator } = require('../../validators/validator')
+const { 
+  PositiveIntegerValidator,
+  ClassicValidator
+ } = require('../../validators/validator')
 const { Auth } = require('../../../middlewares/auth')
 const { AuthType } = require('../../lib/enums')
+const { Flow } = require('../../models/flow')
+const { Art } = require('../../models/art')
 
 router.get('/latest', new Auth().m, async (ctx, next) => {
   /**
    * 查询最新一期期刊
    * 最新一期就是index最大的那个
    * note: 排序
-   * 
    */
-
   const flow = await Flow.findOne({
     // 排序
     order: [
       ['index', 'DESC']
     ]
   })
+  const art = await Art.getData(flow.art_id, flow.type)
+  // 将index信息保存到art.dataValues中
+  // art.dataValues.index = flow.index
+  art.setDataValue('index', flow.index)
+  ctx.body = art
+  /**
+   * 序列化 对象->json
+   */
+})
 
-  ctx.body = flow
+//获取点赞喜欢数量
+router.get('/:type/:id/favor', new Auth().m, async ctx => {
+  const v = await new ClassicValidator().validate(ctx)
+  const id = v.get('path.id')
+  const type = v.get('path.type')
+  const art = await Art.getData(id,type)
 })
 
 //#region 权限问题

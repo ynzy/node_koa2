@@ -7,10 +7,10 @@ const { User } = require('../models/user')
 const { LoginType } = require('../lib/enums')
 /**
  * 校验正整数
- * @class PositiveIntergerValidator
+ * @class PositiveIntegerValidator
  * @extends {LinValidator}
  */
-class PositiveIntergerValidator extends LinValidator {
+class PositiveIntegerValidator extends LinValidator {
   constructor() {
     super()
     this.id = [new Rule('isInt', '需要是正整数', {
@@ -121,9 +121,26 @@ class NotEmptyValidator extends LinValidator{
   }
 }
 
+
+class LikeValidator extends PositiveIntegerValidator {
+  constructor() {
+      super()
+      this.validateType = checkArtType
+      // const checker = new Checker(ArtType)
+      // this.validateType = checker.check.bind(checker)
+  }
+}
+
+class ClassicValidator extends LikeValidator {
+
+}
+
+
 module.exports = {
-  PositiveIntergerValidator,
+  PositiveIntegerValidator,
   RegisterValidator,
   TokenValidator,
-  NotEmptyValidator
+  NotEmptyValidator,
+  LikeValidator,
+  ClassicValidator
 }
