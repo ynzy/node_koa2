@@ -1,5 +1,12 @@
-const { Sequelize, Model } = require('sequelize')
-const { sequelize } = require('../../core/db')
+const {
+  Sequelize,
+  Model,
+  Op
+} = require('sequelize')
+const {
+  sequelize
+} = require('../../core/db')
+const { Art } = require('./art')
 /**
  * 点赞喜欢的模型
  */
@@ -30,7 +37,26 @@ class Favor extends Model {
      *  持久性
      */
     // 使用Sequelize操作数据库事务
-
+    const favor = await Favor.findOne({
+      where: {
+        art_id,
+        type,
+        uid
+      }
+    })
+    if (favor) {
+      throw new global.errs.LikeError()
+    }
+    return sequelize.transaction(async t => {
+      await Favor.create({
+        art_id,
+        type,
+        uid
+      }, { transaction: t })
+      const art = Art.getData(art_id, type)
+      // 加1
+      await art.increment('fav_nums', { by: 1, transaction: t })
+    })
   }
   /**
    * 用户取消点赞
@@ -54,3 +80,7 @@ Favor.init({
   sequelize,
   tableName: 'favor'
 })
+
+module.exports = {
+  Favor
+};
